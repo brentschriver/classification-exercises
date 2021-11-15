@@ -1,6 +1,5 @@
 import pandas as pd
 import env
-
 import os
 
 def get_connection(db, user=env.user, host=env.host, password=env.password):
@@ -26,19 +25,19 @@ def get_titanic_data():
     '''
     This function reads in titanic data from Codeup database, writes data to a csv file if a local file does not exist, and returns a df.
     ''' 
-    if os.path.isfile('titanic_df.csv'):
+    if os.path.isfile('titanic.csv'):
         # If csv file exists, read in data from csv file.
-        df = pd.read_csv('titanic_df.csv', index_col=0)
+        df = pd.read_csv('titanic.csv', index_col=0)
         
     else:
         # read the SQL query into a dataframe
         df = new_titanic_data()
         
         # Write that dataframe to disk for later. Called "caching" the data for later.
-        df.to_csv('titanic_df.csv')
+        df.to_csv('titanic.csv')
 
         # Return the dataframe to the calling code
-        return df
+    return df
 
 
 '''
@@ -49,15 +48,9 @@ def new_iris_data():
     This function reads the iris data from the Codeup db into a df.
     '''
     sql_query = """
-                SELECT 
-                    species_id,
-                    species_name,
-                    sepal_length,
-                    sepal_width,
-                    petal_length,
-                    petal_width
+                SELECT *
                 FROM measurements
-                JOIN species USING(species_id)
+                JOIN species USING(species_id);
                 """
     
     # Read in DataFrame from Codeup db.
@@ -116,6 +109,7 @@ def get_telco_data():
         
         # If csv file exists read in data from csv file.
         df = pd.read_csv('telco.csv', index_col=0)
+        return df
         
     else:
         
