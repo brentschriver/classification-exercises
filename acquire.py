@@ -92,7 +92,7 @@ def new_telco_data():
                 select * from customers
                 join contract_types using (contract_type_id)
                 join internet_service_types using (internet_service_type_id)
-                join payment_types using (payment_type_id)
+                join payment_types using (payment_type_id);
                 """
     
     # Read in DataFrame from Codeup db.
